@@ -45,23 +45,19 @@ services:
       - 9696:9696
     restart: unless-stopped
 
-  resync:
-    image: linuxserver/resilio-sync:latest
-    container_name: resync
+  nascab:
+    image: ypptec/nascab
+    container_name: nascab
     environment:
       - PUID=1000
       - PGID=1000
       - TZ=Asia/Shanghai
     volumes:
-      - ./ban/hosts:/etc/hosts:ro
-      - /etc/dockerapp/resync:/config
-      - /titan/cloud/resync/downloads:/downloads
-      - /titan/cloud/resync/sync:/sync
-
-    network_mode: host
-    #ports:
-    #  - 8888:8888
-    #  - 55555:55555
+      - /root/.local/share/nascab:/root/.local/share/nascab
+      - /titan/cloud:/myData
+    ports:
+      - 9898:80
+      - 9999:90
     restart: unless-stopped
 
   nginx:
