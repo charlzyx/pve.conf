@@ -1,0 +1,13 @@
+[Unit]
+Description=sftpgo service
+Wants=network.target
+After=network.target network.service
+
+[Service]
+Type=simple
+WorkingDirectory=/etc/sftpgo
+ExecStart=/etc/sftpgo/sftpgo serve -c /etc/sftpgo
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target
