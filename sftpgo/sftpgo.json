@@ -148,7 +148,7 @@
         "min_tls_version": 12,
         "client_auth_type": 0,
         "tls_cipher_suites": [],
-        "prefix": "",
+        "prefix": "/dav",
         "proxy_allowed": [],
         "client_ip_proxy_header": "",
         "client_ip_header_depth": 0,

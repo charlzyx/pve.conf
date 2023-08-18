@@ -12,9 +12,10 @@
 auto lo
 iface lo inet loopback
 
+auto enp1s0
 iface enp1s0 inet manual
-# iface enp1s0 inet manual
 
+auto enp2s0
 iface enp2s0 inet manual
 
 auto vmbr0
@@ -26,12 +27,14 @@ iface vmbr0 inet static
 	bridge-fd 0
 	bridge-vlan-aware yes
 	bridge-vids 2-4094
+#LAN
 
 auto vmbr1
-iface vmbr1 inet dhcp
+iface vmbr1 inet manual
 	bridge-ports enp2s0
 	bridge-stp off
 	bridge-fd 0
 	bridge-vlan-aware yes
 	bridge-vids 2-4094
+#WAN
 

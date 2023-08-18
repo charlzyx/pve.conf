@@ -1,6 +1,18 @@
 version: "3.1"
 
 services:
+  #docker run -p 1234:80 -d --name yacd --rm ghcr.io/haishanh/yacd:master
+
+  # and then open http://localhost:1234 in your browser
+  yacd:
+    image: haishanh/yacd:latest
+    container_name: yacd
+    environment:
+      - TZ=Asia/Shanghai
+      - YACD_DEFAULT_BACKEND=http://192.168.6.6:9090
+    ports:
+      - 9091:80
+    restart: unless-stopped
   portainer:
     image: portainer/portainer:latest
     container_name: portainer
@@ -13,23 +25,6 @@ services:
       - 8000:8000
       - 9443:9443
     restart: unless-stopped
-
-  emby:
-    image: amilys/embyserver
-    container_name: emby
-    environment:
-      - PUID=0
-      - PGID=0
-      - TZ=Asia/Shanghai
-    privileged: true
-    ports:
-      - 9096:8096
-    volumes:
-      - /etc/dockerapp/emby/config:/config
-      - /etc/dockerapp/emby/cache:/cache
-      - /titan/space/media:/media
-    restart: unless-stopped
-
 
   jellyfin:
     image: nyanmisaka/jellyfin:latest
@@ -61,21 +56,6 @@ services:
       - /etc/dockerapp/prowlarr:/config
     ports:
       - 9696:9696
-    restart: unless-stopped
-
-  nascab:
-    image: ypptec/nascab
-    container_name: nascab
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Asia/Shanghai
-    volumes:
-      - /root/.local/share/nascab:/root/.local/share/nascab
-      - /titan/cloud:/myData
-    ports:
-      - 9898:80
-      - 9999:90
     restart: unless-stopped
 
   nginx:
